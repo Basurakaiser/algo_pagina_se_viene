@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Entrada al Castillo</title>
+
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+    <main class="escenario">
+
+        <div class="contenedor-puerta">
+
+            <!-- Base de piedras -->
+            <img
+                src="recursos/imagenes/fondo_piedras.png"
+                alt=""
+                class="piedras"
+                draggable="false"
+            >
+
+            <!-- Puerta -->
+            <img
+                src="recursos/imagenes/puerta entrada.png"
+                alt="Puerta de entrada"
+                class="puerta-principal"
+                draggable="false"
+            >
+
+            <!-- Hojas decorativas -->
+            <img
+                src="recursos/imagenes/hojas_png.png"
+                alt=""
+                class="hojas-verdes"
+                draggable="false"
+            >
+
+            <!-- Zona interactiva -->
+            <a
+                class="area-colision"
+                href="pagina20.html"
+                aria-label="Entrar al castillo"
+            ></a>
+
+        </div>
+
+    </main>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            /*
+             * ==========================
+             * FADE IN
+             * ==========================
+             */
+
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    document.body.classList.add("fade-in");
+                });
+            });
+
+
+            /*
+             * ==========================
+             * FADE OUT AL ENTRAR
+             * ==========================
+             */
+
+            const enlaceEntrada =
+                document.querySelector(".area-colision");
+
+            enlaceEntrada.addEventListener("click", function (event) {
+
+                event.preventDefault();
+
+                const destino = this.href;
+
+                // Comienza el Fade Out
+                document.body.classList.remove("fade-in");
+
+                // Esperamos lo mismo que dura la transición CSS
+                setTimeout(() => {
+                    window.location.href = destino;
+                }, 600);
+
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

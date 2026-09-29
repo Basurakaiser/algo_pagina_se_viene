@@ -1,0 +1,378 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    background: url("recursos/imagenes/fondo_piedras.png") center/cover no-repeat fixed;
+    overflow: hidden;
+    font-family: Georgia, serif;
+}
+
+
+/* =========================
+   CONTENEDOR
+   ========================= */
+
+.contenedor-contenido,
+#zona-mision {
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* =========================
+   MESA
+   ========================= */
+
+.mesa-quest {
+    position: relative;
+
+    width: 104vw;
+    height: 128vh;
+
+    transform: translate(-29px, -80px);
+
+    flex-shrink: 0;
+
+    background: url("recursos/imagenes/madera.png") center/cover no-repeat;
+
+    border: 6px solid #332015;
+    border-radius: 48%;
+
+    box-shadow: 0 15px 30px #0008;
+}
+
+
+/* =========================
+   PERGAMINO
+   ========================= */
+
+.contenedor-pergamino {
+    position: absolute;
+
+    left: 14%;
+    top: 17%;
+
+    width: 30%;
+
+    transform: rotate(2deg);
+
+    z-index: 2;
+}
+
+#imagen-pergamino-mesa {
+    width: 100%;
+    height: auto;
+
+    display: block;
+
+    filter: drop-shadow(7px 12px 8px #0008);
+}
+
+
+/* =========================
+   TEXTO DEL PERGAMINO
+   ========================= */
+
+.datos-mision-encima {
+    position: absolute;
+
+    top: 24%;
+    left: 10%;
+
+    width: 80%;
+    height: 64%;
+
+    display: flex;
+    flex-direction: column;
+
+    color: #352414;
+
+    pointer-events: none;
+}
+
+#mesa-mision-categoria {
+    margin: 0 0 25px;
+
+    font-size: 17px;
+    font-style: italic;
+}
+
+#mesa-mision-descripcion {
+    margin: 0;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+.datos-inferiores {
+    margin-top: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+#mesa-mision-prioridad {
+    font-size: 18px;
+}
+
+#mesa-mision-recompensa {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#mesa-mision-roles {
+    font-size: 15px;
+    font-style: italic;
+}
+
+
+/* =========================
+   ZONA DE ENTREGA
+   ========================= */
+
+.zona-entrega {
+    position: absolute;
+
+    left: 55%;
+    top: 18%;
+
+    width: 31%;
+
+    transform: rotate(-2deg);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 20px;
+
+    z-index: 2;
+}
+
+
+/* =========================
+   CUADRO SUBIR ARCHIVO
+   ========================= */
+
+.cuadro-subir-archivo {
+    width: 100%;
+    height: 58vh;
+
+    background: #483939f5;
+
+    border: 7px solid #17110e;
+
+    box-shadow:
+        inset 0 0 15px #0006,
+        8px 10px 0 #0004;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.cuadro-subir-archivo:hover {
+    background: #594747;
+}
+
+.cuadro-subir-archivo.archivo-encima {
+    background: #7d6640;
+
+    transform: scale(1.02);
+}
+
+
+/* =========================
+   ICONO SUBIR
+   ========================= */
+
+.icono-subir {
+    margin-bottom: 35px;
+
+    font: bold 120px Arial;
+
+    line-height: 0.8;
+
+    color: #080606;
+}
+
+.texto-subir {
+    margin: 0 0 15px;
+
+    max-width: 90%;
+
+    font-size: 27px;
+    font-weight: bold;
+
+    color: #080606;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.texto-arrastrar {
+    font-size: 23px;
+
+    color: #080606;
+}
+
+
+/* =========================
+   BOTÓN ENTREGAR
+   ========================= */
+
+#boton-entregar-quest {
+    padding: 12px 25px;
+
+    background: #d6a52d;
+
+    color: #21170c;
+
+    border: 3px solid #33200d;
+    border-radius: 6px;
+
+    font: bold 18px Georgia, serif;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 12px #0006;
+}
+
+#boton-entregar-quest:hover:not(:disabled) {
+    background: #e7bd4b;
+}
+
+#boton-entregar-quest:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+
+/* =========================
+   BOTÓN REGRESAR
+   ========================= */
+
+#boton-regresar {
+    position: fixed;
+
+    top: 20px;
+    left: 20px;
+
+    z-index: 1000;
+
+    padding: 12px 22px;
+
+    background: #d6a52d;
+
+    color: #21170c;
+
+    border: 3px solid #33200d;
+    border-radius: 6px;
+
+    font: bold 18px Georgia, serif;
+
+    text-decoration: none;
+
+    box-shadow: 0 5px 12px #0007;
+}
+
+#boton-regresar:hover {
+    background: #e7bd4b;
+}
+
+
+/* =========================
+   SIN MISIÓN
+   ========================= */
+
+#sin-mision {
+    width: 100%;
+    height: 100vh;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.mensaje-sin-mision {
+    width: 430px;
+
+    padding: 40px;
+
+    background: #deb167f2;
+
+    border: 4px solid #3a2412;
+    border-radius: 12px;
+
+    color: #2a1b0d;
+
+    text-align: center;
+
+    box-shadow: 0 12px 30px #0008;
+}
+
+.icono-sin-mision {
+    font-size: 50px;
+}
+
+.mensaje-sin-mision h1 {
+    font-size: 28px;
+}
+
+.mensaje-sin-mision p {
+    margin-bottom: 30px;
+
+    font-size: 18px;
+}
+
+.boton-buscar-quest {
+    display: inline-block;
+
+    padding: 12px 22px;
+
+    background: #d6a52d;
+
+    color: #21170c;
+
+    border: 3px solid #33200d;
+    border-radius: 6px;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    text-decoration: none;
+}
+
+.boton-buscar-quest:hover {
+    background: #e7bd4b;
+}

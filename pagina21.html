@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Quest Activa</title>
+
+    <link rel="stylesheet" href="pagina21.css">
+</head>
+
+<body>
+
+    <a href="pagina20.html" id="boton-regresar">
+        ← Regresar
+    </a>
+
+    <div class="contenedor-contenido">
+
+        <!-- =====================================
+             ZONA CON MISIÓN ACTIVA
+             ===================================== -->
+
+        <div id="zona-mision">
+
+            <div class="mesa-quest">
+
+                <!-- PERGAMINO -->
+                <div class="contenedor-pergamino">
+
+                    <img
+                        src=""
+                        alt="Pergamino de Misión"
+                        id="imagen-pergamino-mesa"
+                    >
+
+                    <div class="datos-mision-encima">
+
+                        <h4 id="mesa-mision-categoria"></h4>
+
+                        <p id="mesa-mision-descripcion"></p>
+
+                        <div class="datos-inferiores">
+
+                            <div id="mesa-mision-prioridad"></div>
+
+                            <div id="mesa-mision-recompensa"></div>
+
+                            <div id="mesa-mision-roles"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ZONA DE ENTREGA -->
+                <div class="zona-entrega">
+
+                    <div class="cuadro-subir-archivo">
+
+                        <div class="icono-subir">
+                            ↑
+                        </div>
+
+                        <p class="texto-subir">
+                            Click para subir archivo
+                        </p>
+
+                        <span class="texto-arrastrar">
+                            o solo arrastra
+                        </span>
+
+                        <input
+                            type="file"
+                            id="archivo-mision"
+                            hidden
+                        >
+
+                    </div>
+
+                    <button
+                        type="button"
+                        id="boton-entregar-quest"
+                    >
+                        💎 Entregar Quest
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             SIN MISIÓN
+             ===================================== -->
+
+        <div id="sin-mision">
+
+            <div class="mensaje-sin-mision">
+
+                <div class="icono-sin-mision">
+                    ⚔
+                </div>
+
+                <h1>
+                    No tienes una Quest activa
+                </h1>
+
+                <p>
+                    Ve al tablero del gremio y elige una misión.
+                </p>
+
+                <a
+                    href="pagina30.html"
+                    class="boton-buscar-quest"
+                >
+                    Ver tablero de Quests
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="pagina21.js"></script>
+
+</body>
+
+</html>

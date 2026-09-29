@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Interior del Castillo - Página 2</title>
+
+    <link rel="stylesheet" href="pagina20.css">
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            opacity: 0;
+            transition: opacity 600ms ease;
+        }
+
+        body.fade-in {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor-puerta">
+
+        <a
+            class="area-colision"
+            href="index.html"
+            aria-label="Volver">
+        </a>
+
+        <a
+            class="area-colision2"
+            href="pagina21.html"
+            aria-label="Ir a la siguiente zona">
+        </a>
+
+        <a
+            class="area-colision3"
+            href="pagina30.html"
+            aria-label="Ir a otra zona">
+        </a>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            // FADE IN
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    document.body.classList.add("fade-in");
+                });
+            });
+
+            // ENLACES CON FADE OUT
+            const enlaces = document.querySelectorAll(
+                ".area-colision, .area-colision2, .area-colision3"
+            );
+
+            enlaces.forEach(enlace => {
+
+                enlace.addEventListener("click", function (event) {
+
+                    event.preventDefault();
+
+                    const destino = this.href;
+
+                    // Fade out
+                    document.body.classList.remove("fade-in");
+
+                    setTimeout(() => {
+                        window.location.href = destino;
+                    }, 600);
+
+                });
+
+            });
+
+        });
+    </script>
+
+<div class="menu-gremio">
+
+    <img
+        src="recursos\imagenes\caja_dialogo.png"
+        alt="Menú del gremio"
+        class="imagen-menu-gremio"
+    >
+
+    <a href="pagina-puntos.html" class="boton-menu boton-gremio"></a>
+
+    <a href="pagina21.html" class="boton-menu boton-quest"></a>
+
+    <a href="pagina30.html" class="boton-menu boton-tablon"></a>
+
+
+</div>
+</body>
+
+<a href="index.html" id="boton-inicio">← Volver al inicio</a>
+
+</html>

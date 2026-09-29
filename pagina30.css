@@ -1,0 +1,403 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+
+/* =========================
+   FONDO
+   ========================= */
+
+body {
+    min-height: 100vh;
+
+    background: url("recursos/imagenes/madera.png")
+        center / cover no-repeat fixed;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    font-family: Georgia, serif;
+}
+
+
+/* =========================
+   BOTÓN TOMAR MISIÓN
+   ========================= */
+
+#boton-tomar-mision {
+    position: fixed;
+
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    z-index: 1000;
+
+    padding: 12px 30px;
+
+    font-family: Georgia, serif;
+    font-size: 20px;
+    font-weight: bold;
+
+    color: #21170c;
+    background: #d6a52d;
+
+    border: 3px solid #33200d;
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.45);
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+#boton-tomar-mision:hover:not(:disabled) {
+    background: #e7bd4b;
+
+    transform:
+        translateX(-50%)
+        scale(1.05);
+}
+
+#boton-tomar-mision:active:not(:disabled) {
+    transform:
+        translateX(-50%)
+        scale(0.97);
+}
+
+#boton-tomar-mision:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+
+/* =========================
+   CONTENEDOR DEL TABLERO
+   ========================= */
+
+.contenedor-contenido {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    justify-content: flex-start;
+    align-items: center;
+
+    gap: 30px;
+
+    padding: 70px 20px 20px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+
+/* =========================
+   PERGAMINO
+   ========================= */
+
+.contenedor-pergamino {
+    position: relative;
+
+    display: inline-block;
+
+    flex-shrink: 0;
+
+    margin: 40px 15px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease;
+
+    will-change: transform;
+
+    backface-visibility: hidden;
+}
+
+
+/* =========================
+   PERGAMINO SELECCIONADO
+   ========================= */
+
+.contenedor-pergamino.seleccionada {
+    z-index: 100;
+
+    filter:
+        drop-shadow(
+            0 0 25px rgba(255, 215, 0, 0.9)
+        );
+}
+
+
+/*
+   JavaScript coloca:
+   rotate(0deg) scale(1.07)
+   cuando seleccionamos.
+
+   Así evitamos que el hover cambie
+   su posición mientras está seleccionado.
+*/
+
+.contenedor-pergamino.seleccionada:hover {
+    transform:
+        rotate(0deg)
+        scale(1.07) !important;
+}
+
+
+/* =========================
+   IMAGEN DEL PERGAMINO
+   ========================= */
+
+.imagen-papel-pergamino {
+    width: 520px;
+    height: auto;
+
+    display: block;
+
+    filter:
+        drop-shadow(
+            5px 10px 8px rgba(0, 0, 0, 0.55)
+        );
+
+    transition:
+        filter 0.2s ease,
+        transform 0.2s ease;
+
+    user-select: none;
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   HOVER DEL PERGAMINO
+   ========================= */
+
+.contenedor-pergamino:hover
+.imagen-papel-pergamino {
+    filter:
+        drop-shadow(
+            0 0 35px rgba(255, 153, 0, 0.7)
+        );
+}
+
+
+/*
+   Cuando está seleccionado dejamos
+   un resplandor más fuerte.
+*/
+
+.contenedor-pergamino.seleccionada
+.imagen-papel-pergamino {
+    filter:
+        drop-shadow(
+            0 0 45px rgba(255, 200, 0, 0.9)
+        );
+}
+
+
+/* =========================
+   CONTENIDO DEL PERGAMINO
+   ========================= */
+
+.datos-mision-encima {
+    position: absolute;
+
+    top: 28%;
+    left: 5%;
+
+    width: 90%;
+    height: 65%;
+
+    z-index: 10;
+
+    display: flex;
+    flex-direction: column;
+
+    color: #2c3e50;
+
+    text-align: center;
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   CATEGORÍA
+   ========================= */
+
+.mision-categoria {
+    margin-top: -60px;
+
+    font-size: 18px;
+    font-style: italic;
+
+    color: #555;
+}
+
+
+/* =========================
+   DESCRIPCIÓN
+   ========================= */
+
+.mision-descripcion {
+    width: 100%;
+
+    margin-top: 45px;
+
+    padding: 10px 15px;
+
+    font-size: 42px;
+    font-weight: 500;
+    line-height: 1.15;
+
+    /*
+       Impide que palabras/textos enormes
+       atraviesen otros pergaminos.
+    */
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+
+/* =========================
+   DATOS INFERIORES
+   ========================= */
+
+.bloque-detalles-abajo {
+    margin-top: auto;
+
+    padding-left: 30px;
+    padding-bottom: 40px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    text-align: left;
+}
+
+
+/* =========================
+   PRIORIDAD
+   ========================= */
+
+.mision-prioridad {
+    font-size: 25px;
+}
+
+
+/* =========================
+   RECOMPENSA
+   ========================= */
+
+.mision-recompensa {
+    font-size: 25px;
+}
+
+
+/* =========================
+   ROLES
+   ========================= */
+
+.mision-roles-permitidos {
+    font-size: 18px;
+
+    color: #4a5568;
+
+    font-style: italic;
+}
+
+
+/* =========================
+   SCROLL HORIZONTAL
+   ========================= */
+
+.contenedor-contenido::-webkit-scrollbar {
+    height: 25px;
+
+    background: transparent;
+}
+
+
+.contenedor-contenido::-webkit-scrollbar-track {
+    background: #1a1510;
+
+    border: 2px solid #1a1a1a;
+    border-radius: 6px;
+
+    margin: 0 20px;
+}
+
+
+.contenedor-contenido::-webkit-scrollbar-thumb {
+    background: #868684ab;
+
+    border: 2px solid #1a1a1a;
+    border-radius: 6px;
+}
+
+
+.contenedor-contenido::-webkit-scrollbar-thumb:hover {
+    background: #ddbc03;
+}
+
+#boton-regresar {
+    position: fixed;
+
+    top: 20px;
+    left: 20px;
+
+    z-index: 1000;
+
+    padding: 12px 22px;
+
+    font-family: Georgia, serif;
+    font-size: 18px;
+    font-weight: bold;
+
+    color: #21170c;
+    background: #d6a52d;
+
+    border: 3px solid #33200d;
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.45);
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease;
+}
+
+#boton-regresar:hover {
+    background: #e7bd4b;
+    transform: scale(1.05);
+}
+
+#boton-regresar:active {
+    transform: scale(0.97);
+}

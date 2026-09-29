@@ -1,0 +1,221 @@
+/* =========================================
+   CONFIGURACIÓN GENERAL
+   ========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================================
+   ESCENARIO / TABERNA
+   ========================================= */
+
+body {
+    width: 100%;
+    height: 100vh;
+
+    background-image: url("recursos/imagenes/taberna.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   CONTENEDOR PRINCIPAL
+   ========================================= */
+
+.contenedor-puerta {
+    position: relative;
+
+    width: 100%;
+    height: 100vh;
+}
+
+
+/* =========================================
+   MENÚ DEL GREMIO
+
+   MODIFICA ESTO PARA MOVER O CAMBIAR
+   EL TAMAÑO DE TODO EL MENÚ.
+   ========================================= */
+
+.menu-gremio {
+    position: fixed;
+
+    /* POSICIÓN */
+    left: 50%;
+    bottom: 20px;
+
+    /* TAMAÑO */
+    width: 1200px;
+
+    /* CENTRAR */
+    transform: translateX(-50%);
+
+    z-index: 20;
+}
+
+
+/* =========================================
+   IMAGEN DEL MENÚ
+   ========================================= */
+
+.imagen-menu-gremio {
+    width: 100%;
+    height: auto;
+
+    display: block;
+
+    user-select: none;
+    pointer-events: none;
+}
+
+
+/* =========================================
+   CONFIGURACIÓN DE LOS 3 BOTONES
+
+   Todos estos valores son relativos
+   a .menu-gremio.
+   ========================================= */
+
+.boton-menu {
+    position: absolute;
+
+    /* POSICIÓN HORIZONTAL */
+    left: 6%;
+
+    /* TAMAÑO */
+    width: 66%;
+    height: 18%;
+
+    display: block;
+
+    border: none;
+    outline: none;
+
+    cursor: pointer;
+
+    /*
+       ROJO TEMPORAL PARA VER
+       DÓNDE ESTÁ CADA BOTÓN.
+    */
+    background-color: rgba(255, 0, 0, 0.30);
+
+    z-index: 30;
+
+    transition:
+        background-color 150ms ease,
+        transform 150ms ease;
+}
+
+
+/* =========================================
+   BOTÓN 1
+   "QUIERO VER CÓMO MARCHA EL GREMIO"
+   ========================================= */
+
+.boton-gremio {
+    top: 27%;
+}
+
+
+/* =========================================
+   BOTÓN 2
+   "MUÉSTRAME LA QUEST..."
+   ========================================= */
+
+.boton-quest {
+    top: 49%;
+}
+
+
+/* =========================================
+   BOTÓN 3
+   "QUIERO ECHAR UN VISTAZO..."
+   ========================================= */
+
+.boton-tablon {
+    top: 71%;
+}
+
+
+/* =========================================
+   HOVER
+   ========================================= */
+
+.boton-menu:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+
+    transform: scale(1.01);
+}
+
+
+/* =========================================
+   CLICK
+   ========================================= */
+
+.boton-menu:active {
+    transform: scale(0.99);
+}
+
+
+/* =========================================
+   TECLADO
+   ========================================= */
+
+.boton-menu:focus-visible {
+    outline: 3px solid #f1c56b;
+    outline-offset: -4px;
+}
+
+/* =========================
+   BOTÓN VOLVER AL INDEX
+   ========================= */
+
+#boton-inicio {
+    position: fixed;
+
+    top: 20px;
+    right: 20px;
+
+    z-index: 1000;
+
+    padding: 12px 22px;
+
+    background: #d6a52d;
+    color: #21170c;
+
+    border: 3px solid #33200d;
+    border-radius: 6px;
+
+    font: bold 18px Georgia, serif;
+
+    text-decoration: none;
+
+    box-shadow: 0 5px 12px #0007;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+#boton-inicio:hover {
+    background: #e7bd4b;
+    transform: scale(1.05);
+}
+
+#boton-inicio:active {
+    transform: scale(0.97);
+}
