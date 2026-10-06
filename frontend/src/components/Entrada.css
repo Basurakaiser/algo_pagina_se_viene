@@ -1,0 +1,151 @@
+.entrada-escenario {
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #000;
+
+    overflow: hidden;
+}
+
+
+/* ESCENARIO */
+
+.entrada-contenedor-puerta {
+    position: relative;
+
+    width: min(100vw, calc(100vh * 1920 / 970));
+    aspect-ratio: 1920 / 970;
+
+    flex-shrink: 0;
+
+    transform-origin: 50% 55%;
+}
+
+
+/* PIEDRAS */
+
+.entrada-piedras {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 1;
+
+    pointer-events: none;
+    user-select: none;
+}
+
+
+/* PUERTA ANIMADA */
+
+.entrada-puerta-animada {
+    position: absolute;
+
+    /* POSICIÓN */
+    left: 32%;
+    top: -55%;
+
+    /* TAMAÑO */
+    width: 36%;
+    height: 225%;
+
+    z-index: 10;
+
+    background-image: url("/recursos/imagenes/puerta_animada.png");
+    background-repeat: no-repeat;
+
+    /* 8 frames horizontales */
+    background-size: 800% 100%;
+    background-position: 0% center;
+
+    pointer-events: none;
+    user-select: none;
+}
+
+
+/* ANIMACIÓN DE LA PUERTA */
+
+.entrada-puerta-animada.abriendo {
+    animation: abrir-puerta 0.2s steps(7, end) forwards;
+}
+
+@keyframes abrir-puerta {
+    from {
+        background-position: 0% center;
+    }
+
+    to {
+        background-position: 100% center;
+    }
+}
+
+
+/* HOJAS */
+
+.entrada-hojas-verdes {
+    position: absolute;
+
+    width: 100%;
+    height: auto;
+
+    left: 0;
+    top: -31%;
+
+    z-index: 11;
+
+    pointer-events: none;
+    user-select: none;
+}
+
+
+/* ZONA DE CLICK */
+
+.entrada-area-colision {
+    position: absolute;
+
+    left: 38.54%;
+    top: 56.7%;
+
+    width: 20.83%;
+    height: 10.3%;
+
+    padding: 0;
+
+    background: rgba(255, 0, 0, 0.45);
+    border: 2px solid red;
+
+    cursor: pointer;
+
+    z-index: 20;
+}
+
+.entrada-area-colision:disabled {
+    cursor: default;
+}
+
+
+/* EFECTO DE ATRAVESAR LA PUERTA */
+
+.entrada-escenario.entrando
+.entrada-contenedor-puerta {
+    animation:
+        entrar-por-puerta 0.55s ease-in 0.3s forwards;
+}
+
+@keyframes entrar-por-puerta {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.55);
+        opacity: 0;
+    }
+}

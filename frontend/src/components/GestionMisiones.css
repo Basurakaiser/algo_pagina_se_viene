@@ -1,0 +1,469 @@
+/* =====================================================
+   GESTIÓN DE MISIONES — ESTILO TABERNA RPG
+   ===================================================== */
+
+.gestion-misiones {
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 35px 45px 70px;
+
+    color: #2b180c;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(255, 179, 71, 0.16),
+            transparent 45%
+        ),
+        linear-gradient(
+            rgba(27, 13, 6, 0.82),
+            rgba(15, 7, 3, 0.92)
+        ),
+        url("/recursos/imagenes/madera.png");
+
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+
+/* =====================================================
+   CABECERA
+   ===================================================== */
+
+.gestion-cabecera {
+    max-width: 1200px;
+    margin: 0 auto 25px;
+    text-align: center;
+    color: #f3d59b;
+}
+
+.gestion-cabecera h1 {
+    margin: 0;
+
+    font-size: 42px;
+    letter-spacing: 2px;
+
+    color: #f0c36a;
+
+    text-shadow:
+        0 3px 2px #000,
+        0 0 15px rgba(255, 174, 52, 0.35);
+}
+
+.gestion-cabecera p {
+    margin-top: 7px;
+
+    color: #d8b77b;
+    font-style: italic;
+}
+
+
+/* =====================================================
+   BOTÓN VOLVER
+   ===================================================== */
+
+.gestion-volver {
+    position: absolute;
+    top: 25px;
+    left: 30px;
+
+    padding: 10px 20px;
+
+    border: 2px solid #2c1709;
+    border-radius: 5px;
+
+    background: linear-gradient(
+        #e5ad42,
+        #a96818
+    );
+
+    color: #271305;
+
+    font-family: Georgia, serif;
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 0 #3b1d08,
+        0 7px 14px rgba(0, 0, 0, 0.5);
+
+    transition:
+        transform 0.15s ease,
+        filter 0.15s ease;
+}
+
+.gestion-volver:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.12);
+}
+
+
+/* =====================================================
+   PANEL / PERGAMINO
+   ===================================================== */
+
+.gestion-panel {
+    max-width: 1100px;
+    margin: 0 auto 35px;
+    padding: 30px 40px;
+
+    background:
+        linear-gradient(
+            rgba(244, 218, 161, 0.96),
+            rgba(211, 169, 100, 0.96)
+        );
+
+    border: 4px solid #573017;
+    border-radius: 8px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.7),
+        inset 0 0 30px rgba(90, 42, 10, 0.22);
+
+    position: relative;
+}
+
+
+/* pequeñas líneas decorativas */
+
+.gestion-panel::before,
+.gestion-panel::after {
+    content: "";
+    position: absolute;
+
+    left: 3%;
+    width: 94%;
+    height: 2px;
+
+    background: rgba(89, 46, 19, 0.35);
+}
+
+.gestion-panel::before {
+    top: 12px;
+}
+
+.gestion-panel::after {
+    bottom: 12px;
+}
+
+
+.gestion-panel h2 {
+    margin-top: 0;
+    text-align: center;
+
+    color: #4b250e;
+
+    font-size: 28px;
+
+    border-bottom: 2px solid rgba(91, 46, 17, 0.4);
+
+    padding-bottom: 12px;
+}
+
+
+/* =====================================================
+   FORMULARIO
+   ===================================================== */
+
+.gestion-formulario {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(250px, 1fr));
+
+    gap: 18px 28px;
+}
+
+
+.gestion-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+
+.gestion-campo label {
+    font-weight: bold;
+    color: #51290f;
+}
+
+
+.gestion-campo input,
+.gestion-campo select {
+    box-sizing: border-box;
+
+    width: 100%;
+
+    padding: 10px 12px;
+
+    border: 2px solid #70401c;
+    border-radius: 4px;
+
+    background: rgba(255, 243, 205, 0.85);
+
+    color: #301709;
+
+    font-family: Georgia, serif;
+    font-size: 15px;
+
+    outline: none;
+}
+
+
+.gestion-campo input:focus,
+.gestion-campo select:focus {
+    border-color: #a45e19;
+
+    box-shadow:
+        0 0 0 2px rgba(174, 103, 28, 0.25);
+}
+
+
+.gestion-descripcion {
+    grid-column: 1 / -1;
+}
+
+
+/* =====================================================
+   BOTONES
+   ===================================================== */
+
+.gestion-acciones-formulario {
+    grid-column: 1 / -1;
+
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+
+    margin-top: 10px;
+}
+
+
+.gestion-boton {
+    padding: 10px 22px;
+
+    border: 2px solid #3c1e0a;
+    border-radius: 4px;
+
+    background: linear-gradient(
+        #d99b38,
+        #9c5b17
+    );
+
+    color: #241105;
+
+    font-family: Georgia, serif;
+    font-weight: bold;
+    font-size: 15px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 3px 0 #452208,
+        0 5px 10px rgba(0, 0, 0, 0.35);
+}
+
+
+.gestion-boton:hover {
+    filter: brightness(1.12);
+}
+
+
+.gestion-boton:active {
+    transform: translateY(2px);
+    box-shadow:
+        0 1px 0 #452208;
+}
+
+
+.gestion-boton:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+
+.gestion-boton-secundario {
+    background: linear-gradient(
+        #aaa18d,
+        #716653
+    );
+
+    color: #21180e;
+}
+
+
+.gestion-boton-eliminar {
+    background: linear-gradient(
+        #a84d36,
+        #692719
+    );
+
+    color: #f7dfc2;
+}
+
+
+/* =====================================================
+   ERROR
+   ===================================================== */
+
+.gestion-error {
+    max-width: 1100px;
+    margin: 0 auto 20px;
+
+    padding: 13px 18px;
+
+    border: 2px solid #7b2118;
+    border-radius: 5px;
+
+    background: rgba(90, 20, 12, 0.88);
+
+    color: #ffd5b5;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   TABLA
+   ===================================================== */
+
+.gestion-listado {
+    max-width: 1200px;
+    margin: auto;
+
+    padding: 25px;
+
+    background: rgba(39, 20, 8, 0.94);
+
+    border: 4px solid #8a5724;
+    border-radius: 8px;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.75);
+}
+
+
+.gestion-listado h2 {
+    margin-top: 0;
+
+    text-align: center;
+
+    color: #efc16b;
+
+    font-size: 28px;
+
+    text-shadow: 0 2px 2px black;
+}
+
+
+.gestion-tabla-contenedor {
+    overflow-x: auto;
+}
+
+
+.gestion-tabla {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background: #e7c98f;
+
+    color: #2d1709;
+}
+
+
+.gestion-tabla th {
+    padding: 13px 10px;
+
+    background: #633615;
+
+    color: #f5d797;
+
+    border: 1px solid #2e1608;
+
+    text-transform: uppercase;
+
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+
+.gestion-tabla td {
+    padding: 11px 10px;
+
+    border: 1px solid #81552d;
+
+    text-align: center;
+}
+
+
+.gestion-tabla tbody tr:nth-child(even) {
+    background: rgba(115, 70, 29, 0.12);
+}
+
+
+.gestion-tabla tbody tr:hover {
+    background: rgba(255, 196, 85, 0.28);
+}
+
+
+.gestion-tabla-acciones {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+
+.gestion-tabla-acciones button {
+    padding: 6px 12px;
+
+    border: 1px solid #301708;
+    border-radius: 3px;
+
+    font-family: Georgia, serif;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   MENSAJES
+   ===================================================== */
+
+.gestion-mensaje {
+    text-align: center;
+    color: #eacb91;
+
+    padding: 20px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 750px) {
+
+    .gestion-misiones {
+        padding: 90px 15px 40px;
+    }
+
+    .gestion-formulario {
+        grid-template-columns: 1fr;
+    }
+
+    .gestion-descripcion,
+    .gestion-acciones-formulario {
+        grid-column: 1;
+    }
+
+    .gestion-cabecera h1 {
+        font-size: 30px;
+    }
+
+}

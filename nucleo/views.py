@@ -1,11 +1,23 @@
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 
-from rest_framework.decorators import api_view
+from rest_framework import viewsets
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.decorators import (
+    api_view,
+    authentication_classes,
+    permission_classes,
+)
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from .models import Mision
+from .serializers import MisionSerializer
 
+
+# ==================================================
+# DATOS DE UNA MISIÓN
+# ==================================================
 
 def datos_mision(mision):
 
@@ -33,6 +45,8 @@ def datos_mision(mision):
 # ==================================================
 
 @api_view(['GET'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([AllowAny])
 def obtener_mision_aleatoria(request):
 
     misiones = Mision.objects.filter(
@@ -50,6 +64,8 @@ def obtener_mision_aleatoria(request):
 # ==================================================
 
 @api_view(['GET'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([AllowAny])
 def obtener_mision_activa_usuario(
     request,
     nombre_usuario
@@ -60,7 +76,6 @@ def obtener_mision_activa_usuario(
         estado='en_progreso'
     ).first()
 
-
     if not mision:
 
         return Response({
@@ -68,7 +83,6 @@ def obtener_mision_activa_usuario(
             "mensaje":
                 "No tienes ninguna misión activa."
         })
-
 
     datos = datos_mision(mision)
 
@@ -82,6 +96,8 @@ def obtener_mision_activa_usuario(
 # ==================================================
 
 @api_view(['POST'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([AllowAny])
 def tomar_mision(request, mision_id):
 
     usuario = request.data.get(
@@ -89,14 +105,12 @@ def tomar_mision(request, mision_id):
         ''
     ).lower()
 
-
     if not usuario:
 
         return Response({
             "error":
                 "No se recibió el usuario."
         }, status=400)
-
 
     # Comprobamos que no tenga otra quest
 
@@ -109,7 +123,6 @@ def tomar_mision(request, mision_id):
             "error":
                 "Ya tienes una misión en progreso."
         }, status=400)
-
 
     try:
 
@@ -125,13 +138,11 @@ def tomar_mision(request, mision_id):
                 "Esta misión ya no está disponible."
         }, status=404)
 
-
     mision.asignado_a = usuario
 
     mision.estado = 'en_progreso'
 
     mision.fecha_tomada = timezone.now()
-
 
     try:
 
@@ -151,7 +162,6 @@ def tomar_mision(request, mision_id):
             "error": error.message_dict
         }, status=400)
 
-
     return Response({
         "ok": True,
         "mensaje":
@@ -164,6 +174,8 @@ def tomar_mision(request, mision_id):
 # ==================================================
 
 @api_view(['POST'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([AllowAny])
 def entregar_mision(request, mision_id):
 
     try:
@@ -180,11 +192,9 @@ def entregar_mision(request, mision_id):
                 "La misión no existe o ya fue entregada."
         }, status=404)
 
-
     mision.estado = 'entregada'
 
     mision.fecha_entregada = timezone.now()
-
 
     mision.save(
         update_fields=[
@@ -193,10 +203,25 @@ def entregar_mision(request, mision_id):
         ]
     )
 
-
     return Response({
         "ok": True,
         "mensaje":
             "Quest entregada. Esperando aprobación.",
         "id": mision.id
     })
+
+
+# ==================================================
+# CRUD REST DE MISIONES
+# LABORATORIO 8
+# ==================================================
+
+class MisionViewSet(viewsets.ModelViewSet):
+
+    queryset = Mision.objects.all().order_by('id')
+
+    serializer_class = MisionSerializer
+
+    authentication_classes = [BasicAuthentication]
+
+    permission_classes = [AllowAny]

@@ -1,0 +1,1103 @@
+/* =====================================================
+   RESET
+   ===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    overflow: hidden;
+}
+
+/* =====================================================
+   TABERNA
+   ===================================================== */
+
+.taberna {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+
+    --mouse-x: 0px;
+    --mouse-y: 0px;
+
+    /* KAISER */
+    --kaiser-x: 19%;
+    --kaiser-y: 35%;
+    --kaiser-ancho: 550px;
+
+    /* RUOYE */
+    --ruoye-x: 60%;
+    --ruoye-y: 40%;
+    --ruoye-ancho: 600px;
+
+    /* LEA */
+    --lea-x: -2%;
+    --lea-y: 22%;
+    --lea-ancho: 420px;
+
+    /* VICHO */
+    --vicho-x: 73%;
+    --vicho-y: 42%;
+    --vicho-ancho: 630px;
+
+    /* KANO */
+    --kano-x: 15%;
+    --kano-y: 45%;
+    --kano-ancho: 470px;
+
+    /* WALALAN */
+    --walalan-x: 56%;
+    --walalan-y: 46%;
+    --walalan-ancho: 230px;
+
+    /* HISOKA */
+    --hisoka-x: -2%;
+    --hisoka-y: 18%;
+    --hisoka-ancho: 430px;
+}
+
+/* =====================================================
+   ESCENARIO
+   ===================================================== */
+
+.taberna-escenario {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 1;
+    transform: translate3d(0, 0, 0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    contain: layout paint;
+}
+
+/* =====================================================
+   FONDO
+   ===================================================== */
+
+.taberna-fondo {
+    position: absolute;
+    top: -100px;
+    bottom: -100px;
+    left: -35vw;
+    right: -35vw;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    transform: translate3d(var(--mouse-x), var(--mouse-y), 0);
+    transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+    backface-visibility: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* =====================================================
+   NPC
+   ===================================================== */
+
+.taberna-npc {
+    position: absolute;
+    z-index: 8;
+    user-select: none;
+    transform: translate3d(var(--mouse-x), var(--mouse-y), 0);
+    transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+.taberna-npc-kaiser {
+    left: var(--kaiser-x);
+    top: var(--kaiser-y);
+    width: var(--kaiser-ancho);
+}
+
+.taberna-npc-ruoye {
+    left: var(--ruoye-x);
+    top: var(--ruoye-y);
+    width: var(--ruoye-ancho);
+}
+
+.taberna-npc-lea {
+    left: var(--lea-x);
+    top: var(--lea-y);
+    width: var(--lea-ancho);
+}
+
+.taberna-npc-vicho {
+    left: var(--vicho-x);
+    top: var(--vicho-y);
+    width: var(--vicho-ancho);
+}
+
+.taberna-npc-kano {
+    left: var(--kano-x);
+    top: var(--kano-y);
+    width: var(--kano-ancho);
+    z-index: 9;
+}
+
+.taberna-npc-walalan {
+    left: var(--walalan-x);
+    top: var(--walalan-y);
+    width: var(--walalan-ancho);
+}
+
+.taberna-npc-hisoka {
+    left: var(--hisoka-x);
+    top: var(--hisoka-y);
+    width: var(--hisoka-ancho);
+    z-index: 6;
+}
+
+/* =====================================================
+   IMAGEN NPC
+   ===================================================== */
+
+.taberna-npc-imagen {
+    display: block;
+    width: 100%;
+    height: auto;
+    user-select: none;
+    pointer-events: auto;
+    cursor: default;
+    transform: scale(1);
+    transform-origin: center bottom;
+    transition: filter 180ms ease, transform 180ms ease;
+    filter: brightness(0.98) drop-shadow(0 10px 8px rgba(0, 0, 0, 0.38));
+}
+
+.taberna-npc:hover .taberna-npc-imagen {
+    filter: brightness(1.06) drop-shadow(0 10px 9px rgba(0, 0, 0, 0.42));
+    transform: scale(1.008);
+}
+
+/* =====================================================
+   INTERACCIÓN NPC
+   ===================================================== */
+
+.taberna-npc-interaccion {
+    position: absolute;
+    left: 50%;
+    top: -55px;
+    transform: translateX(-50%) translateY(10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 180ms ease, transform 180ms ease;
+    z-index: 20;
+}
+
+.taberna-npc:hover .taberna-npc-interaccion {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.taberna-npc-hablar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 145px;
+    padding: 10px 17px;
+    border: 3px solid #42270e;
+    border-radius: 6px;
+    background: linear-gradient(180deg, #e5c77e, #bc8c3c);
+    color: #2c1909;
+    font: bold 17px Georgia, serif;
+    white-space: nowrap;
+    cursor: pointer;
+    box-shadow:
+        0 6px 14px rgba(0, 0, 0, 0.55),
+        inset 0 0 0 1px #f4e0aa;
+    transition: transform 150ms ease, filter 150ms ease;
+}
+
+.taberna-npc-hablar:hover:not(:disabled) {
+    transform: scale(1.06);
+    filter: brightness(1.08);
+}
+
+.taberna-npc-hablar:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+.taberna-npc-hablar:disabled {
+    cursor: default;
+}
+
+.taberna-npc-icono {
+    font-size: 18px;
+}
+
+/* =====================================================
+   SALA 2
+   ===================================================== */
+
+.taberna-sala2-contenido {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.taberna-sala2-contenido .taberna-npc {
+    pointer-events: auto;
+}
+
+/* =====================================================
+   NAVEGACIÓN ENTRE SALAS
+   ===================================================== */
+
+.taberna-borde {
+    position: absolute;
+    top: 0;
+    width: 90px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    z-index: 150;
+    pointer-events: auto;
+    background: transparent;
+}
+
+.taberna-borde-derecho {
+    right: 0;
+    justify-content: flex-end;
+}
+
+.taberna-borde-izquierdo {
+    left: 0;
+    justify-content: flex-start;
+}
+
+.taberna-borde-luz {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 250ms ease;
+}
+
+.taberna-borde-derecho .taberna-borde-luz {
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(224, 168, 70, 0.12)
+    );
+}
+
+.taberna-borde-izquierdo .taberna-borde-luz {
+    background: linear-gradient(
+        -90deg,
+        transparent,
+        rgba(224, 168, 70, 0.12)
+    );
+}
+
+.taberna-borde:hover .taberna-borde-luz {
+    opacity: 1;
+}
+
+/* =====================================================
+   FLECHAS
+   ===================================================== */
+
+.taberna-flecha {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 110px;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: rgba(242, 204, 118, 0.55);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 76px;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.55;
+    text-shadow: 0 3px 7px rgba(0, 0, 0, 0.82);
+    transition:
+        opacity 180ms ease,
+        color 180ms ease,
+        transform 180ms ease;
+    z-index: 2;
+}
+
+.taberna-flecha-derecha {
+    margin-right: 10px;
+    transform: translateX(5px);
+}
+
+.taberna-flecha-izquierda {
+    margin-left: 10px;
+    transform: translateX(-5px);
+}
+
+.taberna-borde:hover .taberna-flecha {
+    opacity: 1;
+    color: #f1ce7a;
+}
+
+.taberna-borde-derecho:hover .taberna-flecha {
+    transform: translateX(11px);
+}
+
+.taberna-borde-izquierdo:hover .taberna-flecha {
+    transform: translateX(-11px);
+}
+
+.taberna-flecha:disabled {
+    cursor: default;
+}
+
+/* =====================================================
+   TRANSICIÓN ENTRE SALAS
+   ===================================================== */
+
+.taberna-direccion-derecha.taberna-cambio-saliendo .taberna-escenario {
+    animation: camera-salir-derecha 300ms cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+@keyframes camera-salir-derecha {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(-55px);
+        opacity: 0;
+    }
+}
+
+.taberna-direccion-derecha.taberna-cambio-entrando .taberna-escenario {
+    animation: camera-entrar-derecha 350ms cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+
+@keyframes camera-entrar-derecha {
+    from {
+        transform: translateX(55px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.taberna-direccion-izquierda.taberna-cambio-saliendo .taberna-escenario {
+    animation: camera-salir-izquierda 300ms cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+@keyframes camera-salir-izquierda {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(55px);
+        opacity: 0;
+    }
+}
+
+.taberna-direccion-izquierda.taberna-cambio-entrando .taberna-escenario {
+    animation: camera-entrar-izquierda 350ms cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+
+@keyframes camera-entrar-izquierda {
+    from {
+        transform: translateX(-55px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.taberna-transicion-sala {
+    position: fixed;
+    inset: 0;
+    z-index: 8000;
+    pointer-events: none;
+    opacity: 0;
+    background: transparent;
+}
+
+/* =====================================================
+   MENÚ DEL GREMIO
+   ===================================================== */
+
+.menu-gremio {
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    width: 850px;
+    max-width: 90vw;
+    transform: translateX(-50%);
+    z-index: 20;
+}
+
+.imagen-menu-gremio {
+    display: block;
+    width: 100%;
+    height: auto;
+    user-select: none;
+    pointer-events: none;
+}
+
+.boton-menu {
+    position: absolute;
+    left: 6%;
+    width: 66%;
+    height: 18%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+    z-index: 30;
+    transition:
+        background-color 150ms ease,
+        transform 150ms ease;
+}
+
+.boton-gremio {
+    top: 27%;
+}
+
+.boton-quest {
+    top: 49%;
+}
+
+.boton-tablon {
+    top: 71%;
+}
+
+.boton-menu:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.01);
+}
+
+.boton-menu:active:not(:disabled) {
+    transform: scale(0.99);
+}
+
+.boton-menu:focus-visible {
+    outline: 3px solid #f1c56b;
+    outline-offset: -4px;
+}
+
+.boton-menu:disabled {
+    cursor: default;
+}
+
+/* =====================================================
+   BOTÓN VOLVER
+   ===================================================== */
+
+.boton-inicio {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 500;
+    padding: 12px 22px;
+    background: #d6a52d;
+    color: #21170c;
+    border: 3px solid #33200d;
+    border-radius: 6px;
+    font: bold 18px Georgia, serif;
+    cursor: pointer;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.47);
+    transition:
+        background 200ms ease,
+        transform 200ms ease;
+}
+
+.boton-inicio:hover:not(:disabled) {
+    background: #e7bd4b;
+    transform: scale(1.05);
+}
+
+.boton-inicio:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+.boton-inicio:disabled {
+    cursor: default;
+}
+
+/* =====================================================
+   VOLVER AL INICIO
+   ===================================================== */
+
+.taberna-saliendo {
+    pointer-events: none;
+}
+
+.taberna-saliendo .taberna-escenario {
+    animation: alejar-taberna 850ms ease-in-out forwards;
+}
+
+@keyframes alejar-taberna {
+    0% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* =====================================================
+   CAPA NEGRA GLOBAL
+   ===================================================== */
+
+.taberna::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: #000;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.taberna-saliendo::after {
+    animation: negro-final 850ms linear forwards;
+}
+
+@keyframes negro-final {
+    0%,
+    78% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* =====================================================
+   TRANSICIÓN QUEST - IDA
+   ===================================================== */
+
+.taberna-yendo-quest {
+    pointer-events: none;
+}
+
+.taberna-yendo-quest .taberna-escenario {
+    transform-origin: 50% 55%;
+    animation: giro-hacia-mesa 760ms cubic-bezier(0.45, 0, 0.55, 1) forwards;
+}
+
+@keyframes giro-hacia-mesa {
+    0% {
+        transform: translate3d(0, 0, 0) scale(1.04);
+        filter: brightness(1);
+        opacity: 1;
+    }
+
+    42% {
+        transform: translate3d(-110px, -5px, 0) scale(1.09) rotateZ(-1deg);
+        filter: brightness(0.88);
+        opacity: 1;
+    }
+
+    68% {
+        transform: translate3d(-220px, 9px, 0) scale(1.14) rotateZ(-1.5deg);
+        filter: brightness(0.58);
+        opacity: 0.88;
+    }
+
+    100% {
+        transform: translate3d(-360px, -4px, 0) scale(1.2) rotateZ(-2deg);
+        filter: brightness(0.18);
+        opacity: 0.28;
+    }
+}
+
+.taberna-yendo-quest .taberna-npc {
+    animation: ocultar-npc-mesa 430ms ease forwards;
+}
+
+@keyframes ocultar-npc-mesa {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.taberna-yendo-quest .menu-gremio,
+.taberna-yendo-quest .boton-inicio,
+.taberna-yendo-quest .taberna-borde {
+    animation: ocultar-menu-giro 350ms ease forwards;
+}
+
+@keyframes ocultar-menu-giro {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.taberna-transicion-mesa {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(
+        ellipse at center,
+        transparent 15%,
+        rgba(8, 3, 0, 0.08) 38%,
+        rgba(5, 2, 0, 0.42) 72%,
+        rgba(0, 0, 0, 0.92) 100%
+    );
+}
+
+.taberna-yendo-quest .taberna-transicion-mesa {
+    animation: cerrar-vineta-mesa 760ms ease-in forwards;
+}
+
+@keyframes cerrar-vineta-mesa {
+    0% {
+        opacity: 0;
+    }
+
+    55% {
+        opacity: 0.42;
+    }
+
+    78% {
+        opacity: 0.82;
+    }
+
+    100% {
+        opacity: 1;
+        background: #000;
+    }
+}
+
+.taberna-yendo-quest::after {
+    animation: negro-giro-mesa 760ms linear forwards;
+}
+
+@keyframes negro-giro-mesa {
+    0%,
+    68% {
+        opacity: 0;
+    }
+
+    88% {
+        opacity: 0.55;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* =====================================================
+   TRANSICIÓN QUEST - REGRESO
+
+   Usa EXACTAMENTE el mismo movimiento de la ida,
+   pero reproducido en sentido contrario.
+   ===================================================== */
+
+.taberna-volviendo-quest {
+    pointer-events: none;
+}
+
+/*
+    El escenario comienza en el mismo estado
+    donde terminó giro-hacia-mesa y vuelve
+    hasta la posición normal.
+*/
+
+.taberna-volviendo-quest .taberna-escenario {
+    transform-origin: 50% 55%;
+    animation: giro-hacia-mesa 760ms cubic-bezier(0.45, 0, 0.55, 1) reverse both;
+}
+
+/*
+    En la ida los NPC desaparecen.
+    En el regreso reaparecen.
+*/
+
+.taberna-volviendo-quest .taberna-npc {
+    opacity: 0;
+    animation: mostrar-npc-mesa 430ms 330ms ease forwards;
+}
+
+@keyframes mostrar-npc-mesa {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/*
+    El menú, botón de inicio y flecha también
+    vuelven después de comenzar el giro.
+*/
+
+.taberna-volviendo-quest .menu-gremio,
+.taberna-volviendo-quest .boton-inicio,
+.taberna-volviendo-quest .taberna-borde {
+    opacity: 0;
+    animation: mostrar-menu-giro 350ms 410ms ease forwards;
+}
+
+@keyframes mostrar-menu-giro {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/*
+    La misma viñeta que se cierra al entrar
+    ahora se abre.
+*/
+
+.taberna-volviendo-quest .taberna-transicion-mesa {
+    animation: cerrar-vineta-mesa 760ms ease-out reverse both;
+}
+
+/*
+    Negro total -> taberna visible.
+*/
+
+.taberna-volviendo-quest::after {
+    animation: negro-giro-mesa 760ms linear reverse both;
+}
+
+/* =====================================================
+   TRANSICIÓN NPC
+   ===================================================== */
+
+.taberna-yendo-npc {
+    pointer-events: none;
+}
+
+.taberna-yendo-npc .taberna-fondo {
+    transition: none;
+    animation: acercarse-npc-fondo 650ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+/* =====================================================
+   FOCO DE CÁMARA NPC
+   ===================================================== */
+
+.taberna-yendo-kaiser .taberna-fondo {
+    transform-origin: var(--kaiser-x) var(--kaiser-y);
+}
+
+.taberna-yendo-ruoye .taberna-fondo {
+    transform-origin: var(--ruoye-x) var(--ruoye-y);
+}
+
+.taberna-yendo-lea .taberna-fondo {
+    transform-origin: var(--lea-x) var(--lea-y);
+}
+
+.taberna-yendo-vicho .taberna-fondo {
+    transform-origin: var(--vicho-x) var(--vicho-y);
+}
+
+.taberna-yendo-kano .taberna-fondo {
+    transform-origin: var(--kano-x) var(--kano-y);
+}
+
+.taberna-yendo-walalan .taberna-fondo {
+    transform-origin: var(--walalan-x) var(--walalan-y);
+}
+
+.taberna-yendo-hisoka .taberna-fondo {
+    transform-origin: var(--hisoka-x) var(--hisoka-y);
+}
+
+@keyframes acercarse-npc-fondo {
+    0% {
+        transform: translate3d(var(--mouse-x), var(--mouse-y), 0) scale(1);
+        filter: brightness(1);
+    }
+
+    45% {
+        transform: translate3d(var(--mouse-x), var(--mouse-y), 0) scale(1.055);
+        filter: brightness(0.94);
+    }
+
+    100% {
+        transform: translate3d(var(--mouse-x), var(--mouse-y), 0) scale(1.13);
+        filter: brightness(0.38);
+    }
+}
+
+/* =====================================================
+   NPC SELECCIONADO
+   ===================================================== */
+
+.taberna-yendo-kaiser .taberna-npc-kaiser,
+.taberna-yendo-ruoye .taberna-npc-ruoye,
+.taberna-yendo-lea .taberna-npc-lea,
+.taberna-yendo-vicho .taberna-npc-vicho,
+.taberna-yendo-kano .taberna-npc-kano,
+.taberna-yendo-walalan .taberna-npc-walalan,
+.taberna-yendo-hisoka .taberna-npc-hisoka {
+    transition: none;
+    transform-origin: center;
+    animation: acercarse-npc-seleccionado 650ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+@keyframes acercarse-npc-seleccionado {
+    0% {
+        transform: translate3d(var(--mouse-x), var(--mouse-y), 0) scale(1);
+        filter: brightness(1);
+    }
+
+    55% {
+        transform: translate3d(var(--mouse-x), var(--mouse-y), 0) scale(1.12);
+        filter: brightness(1);
+    }
+
+    100% {
+        transform: translate3d(var(--mouse-x), var(--mouse-y), 0) scale(1.28);
+        filter: brightness(0.45);
+        opacity: 0.85;
+    }
+}
+
+/* =====================================================
+   NPC NO SELECCIONADOS
+   ===================================================== */
+
+.taberna-yendo-kaiser .taberna-npc:not(.taberna-npc-kaiser),
+.taberna-yendo-ruoye .taberna-npc:not(.taberna-npc-ruoye),
+.taberna-yendo-lea .taberna-npc:not(.taberna-npc-lea),
+.taberna-yendo-vicho .taberna-npc:not(.taberna-npc-vicho),
+.taberna-yendo-kano .taberna-npc:not(.taberna-npc-kano),
+.taberna-yendo-walalan .taberna-npc:not(.taberna-npc-walalan),
+.taberna-yendo-hisoka .taberna-npc:not(.taberna-npc-hisoka) {
+    animation: ocultar-npc-no-seleccionado 350ms ease forwards;
+}
+
+@keyframes ocultar-npc-no-seleccionado {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+/* =====================================================
+   OCULTAR INTERFAZ AL HABLAR
+   ===================================================== */
+
+.taberna-yendo-npc .menu-gremio,
+.taberna-yendo-npc .boton-inicio,
+.taberna-yendo-npc .taberna-borde {
+    animation: ocultar-interfaz-npc 280ms ease forwards;
+}
+
+@keyframes ocultar-interfaz-npc {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+/* =====================================================
+   CAPA TRANSICIÓN NPC
+   ===================================================== */
+
+.taberna-transicion-npc {
+    position: fixed;
+    inset: 0;
+    z-index: 9997;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(
+        ellipse at center,
+        transparent 10%,
+        rgba(0, 0, 0, 0.18) 45%,
+        rgba(0, 0, 0, 0.82) 100%
+    );
+}
+
+.taberna-yendo-npc .taberna-transicion-npc {
+    animation: transicion-hablar-npc 650ms ease-in forwards;
+}
+
+@keyframes transicion-hablar-npc {
+    0% {
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 0.18;
+    }
+
+    70% {
+        opacity: 0.62;
+    }
+
+    100% {
+        opacity: 1;
+        background: #000;
+    }
+}
+
+.taberna-yendo-npc::after {
+    animation: negro-final-npc 650ms linear forwards;
+}
+
+@keyframes negro-final-npc {
+    0%,
+    68% {
+        opacity: 0;
+    }
+
+    90% {
+        opacity: 0.65;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 1250px) {
+    .menu-gremio {
+        width: 90vw;
+    }
+
+    .taberna-npc-kaiser {
+        width: min(var(--kaiser-ancho), 27vw);
+    }
+
+    .taberna-npc-ruoye {
+        width: min(var(--ruoye-ancho), 27vw);
+    }
+
+    .taberna-npc-lea {
+        width: min(var(--lea-ancho), 24vw);
+    }
+
+    .taberna-npc-vicho {
+        width: min(var(--vicho-ancho), 30vw);
+    }
+
+    .taberna-npc-kano {
+        width: min(var(--kano-ancho), 30vw);
+    }
+
+    .taberna-npc-walalan {
+        width: min(var(--walalan-ancho), 22vw);
+    }
+
+    .taberna-npc-hisoka {
+        width: min(var(--hisoka-ancho), 24vw);
+    }
+
+    .taberna-borde {
+        width: 80px;
+    }
+
+    .taberna-flecha {
+        width: 50px;
+        font-size: 68px;
+    }
+}
+
+@media (max-width: 800px) {
+    .taberna-borde {
+        width: 65px;
+    }
+
+    .taberna-flecha {
+        width: 42px;
+        font-size: 58px;
+    }
+
+    .taberna-flecha-derecha {
+        margin-right: 6px;
+    }
+
+    .taberna-flecha-izquierda {
+        margin-left: 6px;
+    }
+}
+
+/* =====================================================
+   MOVIMIENTO REDUCIDO
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .taberna-fondo,
+    .taberna-npc {
+        transition: none;
+    }
+
+    .taberna-cambio-saliendo .taberna-escenario,
+    .taberna-cambio-entrando .taberna-escenario {
+        animation-duration: 200ms;
+    }
+
+    .taberna-yendo-quest .taberna-escenario,
+    .taberna-volviendo-quest .taberna-escenario,
+    .taberna-yendo-npc .taberna-fondo,
+    .taberna-yendo-npc .taberna-npc {
+        animation-duration: 300ms;
+    }
+
+    .taberna-yendo-quest .taberna-transicion-mesa,
+    .taberna-volviendo-quest .taberna-transicion-mesa {
+        animation-duration: 300ms;
+    }
+}
